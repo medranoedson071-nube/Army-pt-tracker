@@ -4,6 +4,16 @@ import os
 
 PASSING_SCORE = 360
 
+# Step 2: Define event names and default point values at the top as a constant list of dicts (or tuples)
+ACFT_EVENTS = [
+    {"name": "3 Rep Max Deadlift", "raw_score": 200, "points": 70},
+    {"name": "Standing Power Throw", "raw_score": 8.5, "points": 65},
+    {"name": "Hand Release Push-Up", "raw_score": 35, "points": 70},
+    {"name": "Sprint Drag Carry", "raw_score": 120, "points": 65},
+    {"name": "Leg Tuck", "raw_score": 10, "points": 65},
+    {"name": "2 Mile Run", "raw_score": 1560, "points": 70},
+]
+
 class Soldier:
     def __init__(self, name, rank, unit, age, gender):
         self.name = name
@@ -73,14 +83,10 @@ class ScoreTracker:
 
 def main():
     soldier = Soldier("Medrano", "SPC", "1-10 CAV", 25, "M")
-    events = [
-        ACFTEvent("3 Rep Max Deadlift", 200, 70),
-        ACFTEvent("Standing Power Throw", 8.5, 65),
-        ACFTEvent("Hand Release Push-Up", 35, 70),
-        ACFTEvent("Sprint Drag Carry", 120, 65),
-        ACFTEvent("Leg Tuck", 10, 65),
-        ACFTEvent("2 Mile Run", 1560, 70)
-    ]
+
+    # Use the ACFT_EVENTS constant to generate events
+    events = [ACFTEvent(e["name"], e["raw_score"], e["points"]) for e in ACFT_EVENTS]
+
     record = ACFTRecord(soldier)
     for event in events:
         record.add_event(event)
