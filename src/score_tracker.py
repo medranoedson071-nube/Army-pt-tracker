@@ -2,32 +2,31 @@ import json
 import os
 
 class ScoreTracker:
-    def __init__(self, filepath="data/records.json"):
+    def __init__(self, filepath="scores.json"):
         self.filepath = filepath
-        os.makedirs("data", exist_ok=True)
+        if not os.path.exists(filepath):
+            with open(filepath, "w") as f:
+                json.dump({}, f)
 
-    def save_record(self, soldier_name, score, passed, date):
-        records = self.load_records()
-        records.append({
-            "soldier": soldier_name,
+    def save_record(self, name, score, passed, date):
+        with open(self.filepath, "r") as f:
+            data = json.load(f)
+        if name not in data:
+            data[name] = []
+        data[name].append({
             "score": score,
             "passed": passed,
             "date": str(date)
         })
         with open(self.filepath, "w") as f:
-            json.dump(records, f, indent=2)
+            json.dump(data, f, indent=2)
 
-    def load_records(self):
-        if not os.path.exists(self.filepath):
-            return []
+    def show_history(self, name):
         with open(self.filepath, "r") as f:
-            return json.load(f)
-
-    def show_history(self, soldier_name):
-        records = self.load_records()
-        history = [r for r in records if r["soldier"] == soldier_name]
-        if not history:
-            print(f"No records found for {soldier_name}")
-        for r in history:
-            status = "PASS" if r["passed"] else "FAIL"
-            print(f"{r['date']} | Score: {r['score']} | {status}")
+            data = json.load(f)
+        if name not in data:
+            print("No records found.")
+            return
+        for record in data[name]:
+            status = "PASS" if record["passed"] else "FAIL"
+            print(f"  {record['date']} | Score: {record['score']} | {status}")
