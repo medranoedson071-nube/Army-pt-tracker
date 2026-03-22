@@ -1,0 +1,10 @@
+class Soldier:
+    def __init__(self, name, rank, unit, age, gender):
+        self.name = name
+        self.rank = rank
+        self.unit = unit
+        self.age = age
+        self.gender = gender
+
+    def __str__(self):
+        return f"{self.rank} {self.name} | Unit: {self.unit} | Age: {self.age}"
