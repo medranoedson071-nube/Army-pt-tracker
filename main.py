@@ -2,8 +2,11 @@ from src.soldier import Soldier
 from src.acft_event import ACFTEvent
 from src.acft_record import ACFTRecord
 from src.score_tracker import ScoreTracker
+from gt_st_booster import run_booster_menu
 
-def main():
+
+def run_acft():
+    """Run the ACFT score tracker demo."""
     # Create a soldier
     soldier = Soldier("Medrano", "SPC", "1-10 CAV", 25, "M")
 
@@ -35,6 +38,29 @@ def main():
     # Show history
     print("\n=== SCORE HISTORY ===")
     tracker.show_history("Medrano")
+
+
+def main():
+    while True:
+        print("\n" + "=" * 50)
+        print("       ARMY TRACKER — MAIN MENU")
+        print("=" * 50)
+        print("  1. ACFT Score Tracker")
+        print("  2. GT-ST Booster (ASVAB Practice)")
+        print("  3. Exit")
+        print("=" * 50)
+        choice = input("  Select an option (1-3): ").strip()
+
+        if choice == "1":
+            run_acft()
+        elif choice == "2":
+            run_booster_menu()
+        elif choice == "3":
+            print("\n  Goodbye, Soldier. Stay sharp!\n")
+            break
+        else:
+            print("  Invalid choice. Please enter 1, 2, or 3.")
+
 
 if __name__ == "__main__":
     main()
