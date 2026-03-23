@@ -632,7 +632,7 @@ AR_QUESTIONS = [
     },
     {
         "question": (
-            "A solder is ordered to dig a fighting position 3 feet deep, 4 feet wide, "
+            "A soldier is ordered to dig a fighting position 3 feet deep, 4 feet wide, "
             "and 6 feet long. What is the volume of dirt to be removed (in cubic feet)?"
         ),
         "choices": ["A. 48", "B. 60", "C. 72", "D. 84"],
